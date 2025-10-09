@@ -6,15 +6,23 @@
         <div class="flex justify-between items-center mb-3">
           <p class="text-slate-600 text-xs font-semibold">{{ fontName }} - Light</p>
           <button
-            @click="$emit('copy-style', fontName, 'light')"
-            class="px-3 py-1 text-xs bg-slate-600 text-white rounded hover:bg-slate-700 transition-colors flex items-center gap-1"
+            @click="copyStyleWithFeedback(fontName, 'light')"
+            :class="[
+              'px-3 py-1 text-xs rounded transition-all flex items-center gap-1',
+              copiedStyle === `${fontName}-light` 
+                ? 'bg-green-600 text-white' 
+                : 'bg-slate-600 text-white hover:bg-slate-700'
+            ]"
             :title="'Copy CSS style for ' + fontName + ' Light'"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg v-if="copiedStyle !== `${fontName}-light`" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
-            Copy Style
+            <svg v-else xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {{ copiedStyle === `${fontName}-light` ? 'Copied!' : 'Copy Style' }}
           </button>
         </div>
         <div class="text-center bg-white rounded-xl py-12 border border-slate-200">
@@ -46,15 +54,23 @@
         <div class="flex justify-between items-center mb-3">
           <p class="text-slate-300 text-xs font-semibold">{{ fontName }} - Dark</p>
           <button
-            @click="$emit('copy-style', fontName, 'dark')"
-            class="px-3 py-1 text-xs bg-slate-200 text-slate-700 rounded hover:bg-slate-100 transition-colors flex items-center gap-1"
+            @click="copyStyleWithFeedback(fontName, 'dark')"
+            :class="[
+              'px-3 py-1 text-xs rounded transition-all flex items-center gap-1',
+              copiedStyle === `${fontName}-dark` 
+                ? 'bg-green-600 text-white' 
+                : 'bg-slate-200 text-slate-700 hover:bg-slate-100'
+            ]"
             :title="'Copy CSS style for ' + fontName + ' Dark'"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg v-if="copiedStyle !== `${fontName}-dark`" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
-            Copy Style
+            <svg v-else xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {{ copiedStyle === `${fontName}-dark` ? 'Copied!' : 'Copy Style' }}
           </button>
         </div>
         <div class="text-center bg-slate-950 rounded-xl py-10 border border-slate-700">
@@ -85,7 +101,9 @@
 </template>
 
 <script setup>
-defineProps({
+import { ref } from 'vue'
+
+const props = defineProps({
   fonts: {
     type: Array,
     required: true
@@ -128,5 +146,16 @@ defineProps({
   }
 })
 
-defineEmits(['copy-style'])
+const emit = defineEmits(['copy-style'])
+
+const copiedStyle = ref(null)
+
+function copyStyleWithFeedback(fontName, theme) {
+  emit('copy-style', fontName, theme)
+  copiedStyle.value = `${fontName}-${theme}`
+  
+  setTimeout(() => {
+    copiedStyle.value = null
+  }, 2000)
+}
 </script>
