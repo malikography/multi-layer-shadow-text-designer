@@ -1,0 +1,37 @@
+{
+  "name": "multi-layer-shadow-text-designer",
+  "version": "1.0.0",
+  "description": "Create stunning multi-layer shadow text effects with customizable fonts, colors, angles, and depth",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Heziode/multi-layer-shadow-text-designer.git"
+  },
+  "keywords": [
+    "vue",
+    "tailwind",
+    "typography",
+    "text-shadow",
+    "design-tool",
+    "css",
+    "multi-layer-shadow"
+  ],
+  "author": "Heziode",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^3.5.22"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "tailwindcss": "^4.1.14",
+    "vite": "^5.4.20"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
