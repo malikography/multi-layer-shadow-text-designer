@@ -174,7 +174,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   displayText: {
     type: String,

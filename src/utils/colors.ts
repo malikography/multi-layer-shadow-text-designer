@@ -1,4 +1,8 @@
-export const colorPalette = {
+export interface ColorPalette {
+  [key: string]: number[] | string[]
+}
+
+export const colorPalette: ColorPalette = {
   slate: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950],
   gray: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950],
   zinc: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950],

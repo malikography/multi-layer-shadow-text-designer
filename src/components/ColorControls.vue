@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ThemeColorPicker from './ThemeColorPicker.vue'
 
 const props = defineProps({

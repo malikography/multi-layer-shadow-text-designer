@@ -78,7 +78,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import ActionButtons from './components/ActionButtons.vue'
 import FontManager from './components/FontManager.vue'
@@ -87,7 +87,7 @@ import ColorControls from './components/ColorControls.vue'
 import FontGrid from './components/FontGrid.vue'
 import Footer from './components/Footer.vue'
 import { colorPalette } from './utils/colors'
-import { loadFromURL, updateURL } from './utils/urlSync'
+import { loadFromURL, updateURL, type AppState } from './utils/urlSync'
 
 // State
 const fonts = ref([
@@ -159,7 +159,7 @@ watch(darkShadowDirection, () => updateURL(getState()))
 watch(fonts, () => updateURL(getState()), { deep: true })
 
 // Methods
-function getState() {
+function getState(): AppState {
   return {
     displayText: displayText.value,
     textSize: textSize.value,
@@ -183,7 +183,7 @@ function getState() {
   }
 }
 
-function setState(state) {
+function setState(state: AppState): void {
   if (state.displayText !== undefined) displayText.value = state.displayText
   if (state.textSize !== undefined) textSize.value = state.textSize
   if (state.textWeight !== undefined) textWeight.value = state.textWeight
@@ -208,7 +208,7 @@ function setState(state) {
   }
 }
 
-function updateGoogleFontsLink() {
+function updateGoogleFontsLink(): void {
   const existingLink = document.getElementById('googleFontsLink')
   if (existingLink) {
     existingLink.remove()
@@ -228,7 +228,7 @@ function updateGoogleFontsLink() {
   document.head.appendChild(link)
 }
 
-function getShadowGradient(baseColorClass, shadeStrength = 0, direction = 'darken') {
+function getShadowGradient(baseColorClass: string, shadeStrength = 0, direction: 'darken' | 'lighten' = 'darken'): string {
   // Handle black and white (no shades)
   if (baseColorClass === 'black' || baseColorClass === 'white') {
     const angleRad = (shadowAngle.value * Math.PI) / 180
@@ -278,7 +278,7 @@ function getShadowGradient(baseColorClass, shadeStrength = 0, direction = 'darke
   return layers.join(', ')
 }
 
-function resetToDefaults() {
+function resetToDefaults(): void {
   // Reset all values to defaults
   displayText.value = "Alire"
   textSize.value = 60
@@ -315,7 +315,7 @@ function resetToDefaults() {
   window.history.replaceState({}, '', window.location.pathname)
 }
 
-async function copyURL() {
+async function copyURL(): Promise<void> {
   const url = window.location.href
   try {
     await navigator.clipboard.writeText(url)
@@ -328,7 +328,7 @@ async function copyURL() {
   }
 }
 
-async function copyStyle(fontName, theme) {
+async function copyStyle(fontName: string, theme: string): Promise<void> {
   const isLight = theme === 'light'
   const textColor = isLight ? lightTextColor.value : darkTextColor.value
   const shadowColor = isLight ? lightShadowColor.value : darkShadowColor.value
