@@ -171,14 +171,14 @@ multi-layer-shadow-text-designer/
 │   │   ├── ShadowSettings.vue  # Shadow configuration controls
 │   │   └── ThemeColorPicker.vue # Color picker for each theme
 │   ├── utils/
-│   │   ├── colors.js           # Tailwind color palette (266 colors)
-│   │   └── urlSync.js          # URL state synchronization
+│   │   ├── colors.ts           # Tailwind color palette (266 colors)
+│   │   └── urlSync.ts          # URL state synchronization
 │   ├── App.vue                 # Root component
-│   ├── main.js                 # Application entry point
+│   ├── main.ts                 # Application entry point
 │   └── style.css               # Global styles with Tailwind
 ├── index.html                   # HTML entry point
 ├── package.json                # Dependencies and scripts
-├── vite.config.js              # Vite configuration
+├── vite.config.ts              # Vite configuration
 ├── tailwind.config.js          # Tailwind CSS configuration
 └── postcss.config.js           # PostCSS configuration
 ```
