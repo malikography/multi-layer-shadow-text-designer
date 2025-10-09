@@ -37,7 +37,8 @@
           >
             {{ displayText }}
           </div>
-          <div 
+          <div
+            v-if="subtitleText" 
             class="text-slate-500 mt-3 tracking-widest"
             :style="{
               fontFamily: subtitleFont,
