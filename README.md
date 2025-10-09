@@ -27,11 +27,18 @@ Create stunning multi-layer shadow text effects with customizable fonts, colors,
 
 ## 🚀 Getting Started
 
-### Online Version
+### 🌐 Live Demo
 
-Simply open the `alire-logo-explorer3.html` file in your web browser. No installation or build process required!
+**Try it now:** [https://heziode.github.io/multi-layer-shadow-text-designer/](https://heziode.github.io/multi-layer-shadow-text-designer/)
 
-### Local Usage
+### 💻 Local Development
+
+#### Prerequisites
+
+- Node.js 18+ 
+- PNPM 9+ (or use `npm install -g pnpm`)
+
+#### Installation
 
 1. Clone this repository:
    ```bash
@@ -39,9 +46,25 @@ Simply open the `alire-logo-explorer3.html` file in your web browser. No install
    cd multi-layer-shadow-text-designer
    ```
 
-2. Open `alire-logo-explorer3.html` in your web browser
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-That's it! The tool runs entirely in the browser.
+3. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+
+4. Open your browser at `http://localhost:5173/multi-layer-shadow-text-designer/`
+
+#### Build for Production
+
+```bash
+pnpm build
+```
+
+The production-ready files will be in the `dist/` directory.
 
 ## 📖 How to Use
 
@@ -83,7 +106,7 @@ All settings are automatically saved to the URL, making it easy to share your de
 
 **Example URL:**
 ```
-alire-logo-explorer3.html?text=Hello&layers=4&angle=135&distance=3&lightText=blue-600&lightShadow=cyan-300
+https://heziode.github.io/multi-layer-shadow-text-designer/?text=Hello&layers=4&angle=135&distance=3&lightText=blue-600&lightShadow=cyan-300
 ```
 
 ### Copying CSS Styles
@@ -100,10 +123,12 @@ text-shadow: 2px 2px 0 var(--color-yellow-300), 4px 4px 0 var(--color-yellow-400
 
 ## 🛠️ Technologies Used
 
-- **Vue.js 3**: Reactive UI framework
-- **Tailwind CSS 4**: Styling and color system
+- **Vue 3** (Composition API): Modern reactive UI framework
+- **Vite**: Next-generation frontend build tool with lightning-fast HMR
+- **Tailwind CSS 4**: Utility-first CSS framework with full color palette
+- **PNPM**: Fast, disk space efficient package manager
 - **Google Fonts API**: Dynamic font loading
-- **Vanilla JavaScript**: No build process required
+- **GitHub Actions**: Automated deployment to GitHub Pages
 
 ## 🎯 Use Cases
 
@@ -128,6 +153,36 @@ Tested on:
 - Firefox 88+
 - Safari 14+
 
+## 📁 Project Structure
+
+```
+multi-layer-shadow-text-designer/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions deployment workflow
+├── public/                      # Static assets
+├── src/
+│   ├── components/             # Vue components
+│   │   ├── ActionButtons.vue   # Reset and Copy Link buttons
+│   │   ├── ColorControls.vue   # Color section container
+│   │   ├── FontGrid.vue        # Preview grid for all fonts
+│   │   ├── FontManager.vue     # Add/remove Google Fonts
+│   │   ├── Footer.vue          # Footer with links
+│   │   ├── ShadowSettings.vue  # Shadow configuration controls
+│   │   └── ThemeColorPicker.vue # Color picker for each theme
+│   ├── utils/
+│   │   ├── colors.js           # Tailwind color palette (266 colors)
+│   │   └── urlSync.js          # URL state synchronization
+│   ├── App.vue                 # Root component
+│   ├── main.js                 # Application entry point
+│   └── style.css               # Global styles with Tailwind
+├── index.html                   # HTML entry point
+├── package.json                # Dependencies and scripts
+├── vite.config.js              # Vite configuration
+├── tailwind.config.js          # Tailwind CSS configuration
+└── postcss.config.js           # PostCSS configuration
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
@@ -136,6 +191,16 @@ Contributions are welcome! Feel free to:
 - Suggest new features
 - Submit pull requests
 - Improve documentation
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Test locally: `pnpm dev`
+5. Commit your changes: `git commit -m 'Add amazing feature'`
+6. Push to the branch: `git push origin feature/amazing-feature`
+7. Open a Pull Request
 
 ## 📄 License
 
