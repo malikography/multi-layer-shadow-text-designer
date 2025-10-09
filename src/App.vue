@@ -26,9 +26,15 @@
       <!-- Text and Shadow Settings -->
       <ShadowSettings
         v-model:display-text="displayText"
+        v-model:text-size="textSize"
+        v-model:text-weight="textWeight"
+        v-model:subtitle-text="subtitleText"
+        v-model:subtitle-font="subtitleFont"
+        v-model:subtitle-size="subtitleSize"
         v-model:shadow-layers="shadowLayers"
         v-model:shadow-angle="shadowAngle"
         v-model:shadow-distance="shadowDistance"
+        :all-fonts="fonts"
       />
 
       <!-- Color Controls -->
@@ -49,6 +55,11 @@
       <FontGrid
         :fonts="fonts"
         :display-text="displayText"
+        :text-size="textSize"
+        :text-weight="textWeight"
+        :subtitle-text="subtitleText"
+        :subtitle-font="subtitleFont"
+        :subtitle-size="subtitleSize"
         :light-text-color="lightTextColor"
         :light-shadow-color="lightShadowColor"
         :light-shadow-depth="lightShadowDepth"
@@ -92,6 +103,11 @@ const fonts = ref([
 ])
 const newFontName = ref("")
 const displayText = ref("Alire")
+const textSize = ref(60)
+const textWeight = ref(700)
+const subtitleText = ref("Ada Package Manager")
+const subtitleFont = ref("monospace")
+const subtitleSize = ref(12)
 const shadowLayers = ref(3)
 const shadowAngle = ref(45)
 const shadowDistance = ref(3)
@@ -123,6 +139,11 @@ const allColors = computed(() => {
 
 // Watchers for URL sync
 watch(displayText, () => updateURL(getState()))
+watch(textSize, () => updateURL(getState()))
+watch(textWeight, () => updateURL(getState()))
+watch(subtitleText, () => updateURL(getState()))
+watch(subtitleFont, () => updateURL(getState()))
+watch(subtitleSize, () => updateURL(getState()))
 watch(shadowLayers, () => updateURL(getState()))
 watch(shadowAngle, () => updateURL(getState()))
 watch(shadowDistance, () => updateURL(getState()))
@@ -141,6 +162,11 @@ watch(fonts, () => updateURL(getState()), { deep: true })
 function getState() {
   return {
     displayText: displayText.value,
+    textSize: textSize.value,
+    textWeight: textWeight.value,
+    subtitleText: subtitleText.value,
+    subtitleFont: subtitleFont.value,
+    subtitleSize: subtitleSize.value,
     shadowLayers: shadowLayers.value,
     shadowAngle: shadowAngle.value,
     shadowDistance: shadowDistance.value,
@@ -159,6 +185,11 @@ function getState() {
 
 function setState(state) {
   if (state.displayText !== undefined) displayText.value = state.displayText
+  if (state.textSize !== undefined) textSize.value = state.textSize
+  if (state.textWeight !== undefined) textWeight.value = state.textWeight
+  if (state.subtitleText !== undefined) subtitleText.value = state.subtitleText
+  if (state.subtitleFont !== undefined) subtitleFont.value = state.subtitleFont
+  if (state.subtitleSize !== undefined) subtitleSize.value = state.subtitleSize
   if (state.shadowLayers !== undefined) shadowLayers.value = state.shadowLayers
   if (state.shadowAngle !== undefined) shadowAngle.value = state.shadowAngle
   if (state.shadowDistance !== undefined) shadowDistance.value = state.shadowDistance
@@ -244,12 +275,17 @@ function getShadowGradient(baseColorClass, shadeStrength = 0, direction = 'darke
     
     layers.push(`${offsetX}px ${offsetY}px 0 var(--color-${colorName}-${currentShade})`)
   }
-
   return layers.join(', ')
 }
 
 function resetToDefaults() {
+  // Reset all values to defaults
   displayText.value = "Alire"
+  textSize.value = 60
+  textWeight.value = 700
+  subtitleText.value = "Ada Package Manager"
+  subtitleFont.value = "monospace"
+  subtitleSize.value = 12
   shadowLayers.value = 3
   shadowAngle.value = 45
   shadowDistance.value = 3

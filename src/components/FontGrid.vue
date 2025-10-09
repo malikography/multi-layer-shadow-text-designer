@@ -19,16 +19,24 @@
         </div>
         <div class="text-center bg-white rounded-xl py-12 border border-slate-200">
           <div
-            :class="['text-6xl font-bold', 'text-' + lightTextColor]"
+            :class="['font-bold', 'text-' + lightTextColor]"
             :style="{
               fontFamily: `'${fontName}'`,
+              fontSize: textSize + 'px',
+              fontWeight: textWeight,
               textShadow: getShadowGradient(lightShadowColor, lightShadowDepth, lightShadowDirection)
             }"
           >
             {{ displayText }}
           </div>
-          <div class="text-xs text-slate-500 mt-3 tracking-widest" style="font-family: monospace">
-            Ada Package Manager
+          <div 
+            class="text-slate-500 mt-3 tracking-widest"
+            :style="{
+              fontFamily: subtitleFont,
+              fontSize: subtitleSize + 'px'
+            }"
+          >
+            {{ subtitleText }}
           </div>
         </div>
       </div>
@@ -51,16 +59,24 @@
         </div>
         <div class="text-center bg-slate-950 rounded-xl py-10 border border-slate-700">
           <div
-            :class="['text-6xl font-bold', 'text-' + darkTextColor]"
+            :class="['font-bold', 'text-' + darkTextColor]"
             :style="{
               fontFamily: `'${fontName}'`,
+              fontSize: textSize + 'px',
+              fontWeight: textWeight,
               textShadow: getShadowGradient(darkShadowColor, darkShadowDepth, darkShadowDirection)
             }"
           >
             {{ displayText }}
           </div>
-          <div class="text-xs text-slate-400 mt-3 tracking-widest" style="font-family: monospace">
-            Ada Package Manager
+          <div 
+            class="text-slate-400 mt-3 tracking-widest"
+            :style="{
+              fontFamily: subtitleFont,
+              fontSize: subtitleSize + 'px'
+            }"
+          >
+            {{ subtitleText }}
           </div>
         </div>
       </div>
@@ -76,6 +92,26 @@ defineProps({
   },
   displayText: {
     type: String,
+    required: true
+  },
+  textSize: {
+    type: Number,
+    required: true
+  },
+  textWeight: {
+    type: Number,
+    required: true
+  },
+  subtitleText: {
+    type: String,
+    required: true
+  },
+  subtitleFont: {
+    type: String,
+    required: true
+  },
+  subtitleSize: {
+    type: Number,
     required: true
   },
   lightTextColor: String,

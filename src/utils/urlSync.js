@@ -9,6 +9,40 @@ export function loadFromURL(allColors) {
     state.displayText = params.get('text')
   }
   
+  // Text Size (20-120)
+  if (params.has('textSize')) {
+    const size = parseInt(params.get('textSize'))
+    if (!isNaN(size) && size >= 20 && size <= 120) {
+      state.textSize = size
+    }
+  }
+  
+  // Text Weight (100-900)
+  if (params.has('textWeight')) {
+    const weight = parseInt(params.get('textWeight'))
+    if (!isNaN(weight) && weight >= 100 && weight <= 900) {
+      state.textWeight = weight
+    }
+  }
+  
+  // Subtitle Text
+  if (params.has('subtitle')) {
+    state.subtitleText = params.get('subtitle')
+  }
+  
+  // Subtitle Font
+  if (params.has('subtitleFont')) {
+    state.subtitleFont = params.get('subtitleFont')
+  }
+  
+  // Subtitle Size (8-24)
+  if (params.has('subtitleSize')) {
+    const size = parseInt(params.get('subtitleSize'))
+    if (!isNaN(size) && size >= 8 && size <= 24) {
+      state.subtitleSize = size
+    }
+  }
+  
   // Shadow Layers (1-6)
   if (params.has('layers')) {
     const layers = parseInt(params.get('layers'))
@@ -95,6 +129,11 @@ export function updateURL(state) {
   
   // Only add non-default values to keep URL clean
   if (state.displayText !== 'Alire') params.set('text', state.displayText)
+  if (state.textSize !== 60) params.set('textSize', state.textSize)
+  if (state.textWeight !== 700) params.set('textWeight', state.textWeight)
+  if (state.subtitleText !== 'Ada Package Manager') params.set('subtitle', state.subtitleText)
+  if (state.subtitleFont !== 'monospace') params.set('subtitleFont', state.subtitleFont)
+  if (state.subtitleSize !== 12) params.set('subtitleSize', state.subtitleSize)
   if (state.shadowLayers !== 3) params.set('layers', state.shadowLayers)
   if (state.shadowAngle !== 45) params.set('angle', state.shadowAngle)
   if (state.shadowDistance !== 3) params.set('distance', state.shadowDistance)
